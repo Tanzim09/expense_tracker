@@ -20,6 +20,7 @@ RUN chmod +x /wait-for-db.sh
 EXPOSE 8000
 
 
+# Command for both local & Render
 CMD if [ "$DJANGO_ENV" = "production" ]; then \
     echo " Waiting for database..."; \
     python wait_for_db.py && \
