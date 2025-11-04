@@ -13,8 +13,14 @@ SECRET_KEY = 'django-insecure-%d$w3t4qr305@a5w065a8l+a@i_z(q(_i0%uez)$bhm(9wefgc
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["expense-tracker-lv69.onrender.com"]
-CSRF_TRUSTED_ORIGINS = ["https://expense-tracker-lv69.onrender.com"]
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS = [RENDER_EXTERNAL_HOSTNAME, "localhost", "127.0.0.1"]
+    CSRF_TRUSTED_ORIGINS = [f"https://{RENDER_EXTERNAL_HOSTNAME}"]
+else:
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+    CSRF_TRUSTED_ORIGINS = ["http://localhost:8000"]
 
 
 
