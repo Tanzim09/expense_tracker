@@ -1,38 +1,26 @@
-
+# Use lightweight Python base image
 FROM python:3.12-slim
 
-
-# Create and switch to a working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy dependencies list and install them
+# Copy dependency file and install packages
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of your Django project files into /app
+# Copy all project files
 COPY . .
-
-
-
 
 # Expose port 8000
 EXPOSE 8000
 
-# Default commands
-#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
-# Collect static files (for production)
-RUN python manage.py collectstatic --noinput
-
-# Apply database migrations
-RUN python manage.py migrate --noinput
-
-
 # Command for both local & Render
 CMD if [ "$DJANGO_ENV" = "production" ]; then \
-    echo " Starting Gunicorn for Render..."; \
+    echo "🚀 Running migrations and starting Gunicorn..."; \
+    python manage.py migrate --noinput && \
+    python manage.py collectstatic --noinput && \
     gunicorn expense_tracker.wsgi:application --bind 0.0.0.0:8000; \
   else \
-    echo " Starting Django dev server..."; \
+    echo "💻 Running Django dev server locally..."; \
     python manage.py runserver 0.0.0.0:8000; \
   fi
