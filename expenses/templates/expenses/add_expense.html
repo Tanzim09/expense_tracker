@@ -1,0 +1,13 @@
+{% extends 'expenses/base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h3 class="mb-3">{% if update %}Edit Expense{% else %}Add Expense{% endif %}</h3>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-success w-100">{% if update %}Update{% else %}Save{% endif %}</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

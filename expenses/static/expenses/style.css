@@ -1,0 +1,180 @@
+/* ---------- Base Layout ---------- */
+body {
+  background-color: #f8f9fb;
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  color: #212529;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+/* ---------- Navbar ---------- */
+
+.navbar {
+  background-color: #1f2937 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 0.75rem 1rem;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Navbar Brand Styling */
+.brand-text {
+  color: #ffffff !important;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+}
+
+.brand-text:hover {
+  color: #e5e7eb !important;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.navbar-brand span {
+  color: #0d6efd;
+}
+
+.nav-link {
+  color: #d1d5db !important;
+  position: relative;
+  transition: color 0.2s ease;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.4px;
+}
+
+.nav-link:hover {
+  color: #fff !important;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background-color: #0d6efd;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.btn-outline-light {
+  border-color: #f3f4f6;
+  color: #f9fafb;
+}
+
+.btn-outline-light:hover {
+  background-color: #fff;
+  color: #1f2937 !important;
+}
+
+/* ---------- Dashboard ---------- */
+h3 {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.5rem;
+  color: #374151;
+}
+
+.card {
+  border: none;
+  border-radius: 0.75rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+}
+
+.card-body h5, .card-body h6 {
+  color: #6b7280;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-body h2 {
+  font-weight: 700;
+  color: #111827;
+}
+
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table thead {
+  background-color: #111827;
+  color: #fff;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f3f4f6;
+}
+
+/* ---------- Form Filters ---------- */
+form label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6b7280;
+}
+
+form input, form select {
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  transition: all 0.2s ease;
+}
+
+form input:focus, form select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+}
+
+/* ---------- Charts ---------- */
+canvas {
+  margin-top: 10px;
+}
+
+/* ---------- Alerts ---------- */
+.alert {
+  border-radius: 0.5rem;
+  font-weight: 500;
+}
+
+/* ---------- Buttons ---------- */
+.btn-dark {
+  background-color: #0d6efd;
+  border: none;
+}
+
+.btn-dark:hover {
+  background-color: #0b5ed7;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #1e40af;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .navbar .nav-link {
+    padding: 0.4rem 0;
+  }
+}

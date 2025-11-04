@@ -1,0 +1,115 @@
+{% extends 'expenses/base.html' %}
+{% block content %}
+<h3 class="mb-3">Dashboard</h3>
+
+<form class="row g-3 mb-4" method="get">
+  <div class="col-md-3">
+    <label class="form-label">Start date</label>
+    <input type="date" name="start_date" value="{{ start_date }}" class="form-control">
+  </div>
+  <div class="col-md-3">
+    <label class="form-label">End date</label>
+    <input type="date" name="end_date" value="{{ end_date }}" class="form-control">
+  </div>
+  <div class="col-md-3">
+    <label class="form-label">Category</label>
+    <select name="category" class="form-select">
+      <option value="all" {% if selected_category == 'all' %}selected{% endif %}>All</option>
+      {% for c in categories %}
+        <option value="{{ c.name }}" {% if selected_category == c.name %}selected{% endif %}>{{ c.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-3 d-flex align-items-end">
+    <button class="btn btn-primary w-100">Apply Filters</button>
+  </div>
+</form>
+
+<div class="row g-4">
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5>Total (filtered)</h5>
+        <h2 class="mb-0">৳ {{ total_all }}</h2>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5>Spending by Category (All Time)</h5>
+        <canvas id="pieChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4 mt-1">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h5>Last 6 Days</h5>
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h5 class="mt-4">Recent Expenses</h5>
+<div class="table-responsive">
+<table class="table table-striped align-middle">
+  <thead class="table-dark">
+    <tr>
+      <th>Date</th><th>Category</th><th>Description</th><th class="text-end">Amount</th><th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for e in expenses %}
+    <tr>
+      <td>{{ e.date }}</td>
+      <td>
+          {% if e.category %}
+            {{ e.category.name }}
+          {% else %}
+            Uncategorized
+          {% endif %}
+      </td>
+
+      <td>{{ e.description }}</td>
+      <td class="text-end">৳ {{ e.amount }}</td>
+      <td class="text-end">
+        <a class="btn btn-sm btn-outline-secondary" href="{% url 'update_expense' e.pk %}">Edit</a>
+        <a class="btn btn-sm btn-outline-danger" href="{% url 'delete_expense' e.pk %}"
+           onclick="return confirm('Delete this expense?');">Delete</a>
+      </td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="5" class="text-center">No expenses found.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+<script>
+  // Pie
+  const pieCtx = document.getElementById('pieChart');
+  new Chart(pieCtx, {
+    type: 'pie',
+    data: {
+      labels: {{ pie_labels|safe }},
+      datasets: [{ data: {{ pie_data|safe }} }]
+    }
+  });
+
+  // Bar
+  const barCtx = document.getElementById('barChart');
+  new Chart(barCtx, {
+    type: 'bar',
+    data: {
+      labels: {{ bar_labels|safe }},
+      datasets: [{ label: 'Daily Total', data: {{ bar_data|safe }} }]
+    },
+    options: { scales: { y: { beginAtZero: true } } }
+  });
+</script>
+{% endblock %}
