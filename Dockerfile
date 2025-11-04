@@ -24,6 +24,9 @@ EXPOSE 8000
 # Collect static files (for production)
 RUN python manage.py collectstatic --noinput
 
+# Apply database migrations
+RUN python manage.py migrate --noinput
+
 
 # Command for both local & Render
 CMD if [ "$DJANGO_ENV" = "production" ]; then \
