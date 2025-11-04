@@ -12,14 +12,18 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of your Django project files into /app
 COPY . .
 
-# Collect static files (for production)
-RUN python manage.py collectstatic --noinput || true
+
+
 
 # Expose port 8000
 EXPOSE 8000
 
 # Default commands
 #CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+# Collect static files (for production)
+RUN python manage.py collectstatic --noinput
+
 
 # Command for both local & Render
 CMD if [ "$DJANGO_ENV" = "production" ]; then \
