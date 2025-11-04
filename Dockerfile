@@ -1,8 +1,6 @@
 
 FROM python:3.12-slim
 
-ENV PYTHONDONTWRITEBYTECODE 1  
-ENV PYTHONUNBUFFERED 1         #
 
 # Create and switch to a working directory inside the container
 WORKDIR /app
