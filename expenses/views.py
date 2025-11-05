@@ -13,6 +13,7 @@ from django.shortcuts import get_object_or_404
 import csv
 from django.http import HttpResponse
 from .tasks import export_expenses_csv
+import os
 
 
 # Create your views here.
@@ -165,6 +166,13 @@ def export_csv(request):
     end = request.GET.get('end_date') or None
     category = request.GET.get('category') or None
 
-    export_expenses_csv.delay(request.user.id, start, end, category)
+    if os.getenv("ON_RENDER") == "true":
+    # Render environment → skip Celery
+        export_expenses_csv(request.user.id, start, end, category)
+    else:
+    # Local environment → use Celery as usual
+        export_expenses_csv.delay(request.user.id, start, end, category)
+
+
     messages.info(request, "Export started… you’ll receive an email with your CSV file when it’s ready.")
     return redirect('dashboard')
