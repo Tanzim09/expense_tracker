@@ -14,6 +14,7 @@ import csv
 from django.http import HttpResponse
 from .tasks import export_expenses_csv
 import os
+import threading
 
 
 # Create your views here.
@@ -156,23 +157,26 @@ def delete_expense(request, pk):
 
 
 @login_required
+@login_required
 def export_csv(request):
     """
-    Start a background Celery task to export users expenses and email the link.
+    Export expenses CSV.
+    Locally uses Celery.
+    On Render (no Celery worker), run task in a background thread
     """
-
-    # (None = task will export everything for the user)
     start = request.GET.get('start_date') or None
     end = request.GET.get('end_date') or None
     category = request.GET.get('category') or None
 
-    if os.getenv("ON_RENDER") == "true":
-    # Render environment → skip Celery
+    def run_task():
         export_expenses_csv(request.user.id, start, end, category)
-    else:
-    # Local environment → use Celery as usual
-        export_expenses_csv.delay(request.user.id, start, end, category)
 
+    if os.getenv("ON_RENDER") == "true":
+        # lightweight background thread
+        threading.Thread(target=run_task).start()
+    else:
+        # Use Celery normally when available
+        export_expenses_csv.delay(request.user.id, start, end, category)
 
     messages.info(request, "Export started… you’ll receive an email with your CSV file when it’s ready.")
     return redirect('dashboard')
