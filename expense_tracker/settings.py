@@ -3,6 +3,7 @@ import os
 from celery.schedules import crontab
 import dj_database_url
 from dotenv import load_dotenv
+import sys
 
 load_dotenv() 
 
@@ -160,3 +161,20 @@ DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
 BASE_URL = os.getenv("BASE_URL", "http://localhost:8000")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# For testing purpose only
+# using sqlite3 when tests are running pytest or manage.py test
+if (
+    "pytest" in sys.modules
+    or "pytest" in sys.argv
+    or "test" in sys.argv
+):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "test_db.sqlite3",
+        }
+    }
+
+
