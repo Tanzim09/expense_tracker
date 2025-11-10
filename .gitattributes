@@ -1,11 +1,9 @@
 
+static/* linguist-vendored
+templates/* linguist-vendored
 *.js linguist-vendored
-*.min.js linguist-vendored
-
-
-*.html linguist-detectable=true
-*.css linguist-detectable=true
+*.css linguist-vendored
+*.html linguist-vendored
 
 
 *.py linguist-detectable=true
-
