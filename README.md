@@ -34,8 +34,6 @@ You can log in directly using this demo account:
 ### Dashboard (Overview + Charts)
 ![Dashboard](assets/screenshots/dashboard.png)
 
-### Recent Expenses List
-![Recent Expenses](assets/screenshots/recent_expenses.png)
 
 ### Export CSV Feature
 ![Export CSV](assets/screenshots/export_csv_feature.png)
