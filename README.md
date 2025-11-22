@@ -20,7 +20,7 @@ The project includes background task automation with Celery and caching with Red
 ### Demo Login
 You can log in directly using this demo account:
 
-**Username:** demo_user!  
+**Username:** demo_expense  
 **Password:** DemoPass123
 
 ## Screenshots
