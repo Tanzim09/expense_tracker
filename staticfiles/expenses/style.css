@@ -1,70 +1,81 @@
-/* ---------- Base Layout ---------- */
+/* ----------------------------------------------------
+   GLOBAL PREMIUM BACKGROUND (SOFT GRID)
+---------------------------------------------------- */
 body {
-  background-color: #f8f9fb;
-  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
-  color: #212529;
+  background: linear-gradient(180deg, #f7f9fc 0%, #eef1f6 100%);
+  position: relative;
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
   overflow-x: hidden;
+  color: #1f2937;
 }
 
+/* Soft subtle grid overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-size: 32px 32px;
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.22;
+}
+
+/* ----------------------------------------------------
+   CONTAINER
+---------------------------------------------------- */
 .container {
   max-width: 1200px;
 }
 
-/* ---------- Navbar ---------- */
-
+/* ----------------------------------------------------
+   NAVBAR — PREMIUM LOOK
+---------------------------------------------------- */
 .navbar {
-  background-color: #1f2937 !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background: rgba(17, 24, 39, 0.9) !important;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
   padding: 0.75rem 1rem;
 }
 
-.navbar-brand {
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-/* Navbar Brand Styling */
 .brand-text {
   color: #ffffff !important;
-  letter-spacing: 1px;
-  font-weight: 700;
-  font-size: 1.25rem;
-  text-transform: uppercase;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  font-size: 1.35rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+  transition: 0.3s ease;
 }
 
 .brand-text:hover {
-  color: #e5e7eb !important;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-}
-
-.navbar-brand span {
-  color: #0d6efd;
+  color: #dbeafe !important;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.35);
 }
 
 .nav-link {
-  color: #d1d5db !important;
-  position: relative;
-  transition: color 0.2s ease;
-  font-weight: 500;
+  color: #cbd5e1 !important;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: 0.25s ease;
   text-transform: uppercase;
   font-size: 0.85rem;
-  letter-spacing: 0.4px;
 }
 
 .nav-link:hover {
-  color: #fff !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
 }
 
 .nav-link::after {
   content: "";
   position: absolute;
-  left: 0;
   bottom: -3px;
-  width: 0;
+  left: 0;
+  width: 0%;
   height: 2px;
-  background-color: #0d6efd;
+  background-color: #3b82f6;
   transition: width 0.3s ease;
 }
 
@@ -72,9 +83,11 @@ body {
   width: 100%;
 }
 
+/* Buttons */
 .btn-outline-light {
   border-color: #f3f4f6;
   color: #f9fafb;
+  transition: 0.25s ease;
 }
 
 .btn-outline-light:hover {
@@ -82,99 +95,153 @@ body {
   color: #1f2937 !important;
 }
 
-/* ---------- Dashboard ---------- */
+/* ----------------------------------------------------
+   HEADINGS & TEXT
+---------------------------------------------------- */
 h3 {
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.5px;
+  color: #1e293b;
   margin-bottom: 1.5rem;
-  color: #374151;
 }
 
+/* ----------------------------------------------------
+   CARDS — FROSTED GLASS PREMIUM
+---------------------------------------------------- */
 .card {
   border: none;
-  border-radius: 0.75rem;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.12);
+  transition: 0.3s ease;
 }
 
-.card-body h5, .card-body h6 {
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+.card-body h5 {
   color: #6b7280;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   font-size: 0.85rem;
-  margin-bottom: 0.5rem;
 }
 
+/* Main amount */
 .card-body h2 {
-  font-weight: 700;
+  font-weight: 800;
   color: #111827;
 }
 
-.table {
+/* ----------------------------------------------------
+   FORMS / INPUTS
+---------------------------------------------------- */
+form label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: 0.5px;
+}
+
+form input,
+form select {
   border-radius: 10px;
+  border: 1px solid #d1d5db;
+  transition: 0.25s ease;
+  background-color: #f9fafb;
+}
+
+form input:focus,
+form select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+/* ----------------------------------------------------
+   TABLES — MODERN LOOK
+---------------------------------------------------- */
+.table {
+  border-radius: 12px;
   overflow: hidden;
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .table thead {
-  background-color: #111827;
-  color: #fff;
+  background-color: #1e293b;
+  color: #ffffff;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-  background-color: #f3f4f6;
+  background-color: #f1f5f9;
 }
 
-/* ---------- Form Filters ---------- */
-form label {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #6b7280;
+.table-hover tbody tr:hover {
+  background-color: #e2e8f0;
 }
 
-form input, form select {
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  transition: all 0.2s ease;
+/* Action buttons inside table */
+.table a.btn-sm {
+  transition: 0.25s ease;
 }
 
-form input:focus, form select:focus {
-  border-color: #0d6efd;
-  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+.table a.btn-sm:hover {
+  transform: translateY(-2px);
 }
 
-/* ---------- Charts ---------- */
+/* ----------------------------------------------------
+   CHARTS — CLEANER SPACING
+---------------------------------------------------- */
 canvas {
   margin-top: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
 }
 
-/* ---------- Alerts ---------- */
-.alert {
-  border-radius: 0.5rem;
-  font-weight: 500;
-}
-
-/* ---------- Buttons ---------- */
-.btn-dark {
-  background-color: #0d6efd;
-  border: none;
-}
-
-.btn-dark:hover {
-  background-color: #0b5ed7;
-}
-
+/* ----------------------------------------------------
+   BOOTSTRAP BUTTON OVERRIDES
+---------------------------------------------------- */
 .btn-primary {
   background-color: #2563eb;
   border: none;
+  transition: 0.25s;
 }
 
 .btn-primary:hover {
   background-color: #1e40af;
 }
 
-/* ---------- Responsive ---------- */
+.btn-dark {
+  background-color: #3b82f6;
+  border: none;
+}
+
+.btn-dark:hover {
+  background-color: #2563eb;
+}
+
+/* ----------------------------------------------------
+   ALERTS
+---------------------------------------------------- */
+.alert {
+  border-radius: 0.6rem;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+/* ----------------------------------------------------
+   RESPONSIVE IMPROVEMENTS
+---------------------------------------------------- */
 @media (max-width: 768px) {
   .navbar .nav-link {
     padding: 0.4rem 0;
+  }
+
+  .card {
+    border-radius: 0.85rem;
   }
 }
